@@ -8,6 +8,7 @@ class SignUpModal extends Component {
   static propTypes = {
     open: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
+    setSuccessMsg: PropTypes.func.isRequired,
   };
 
   state = {
@@ -65,18 +66,13 @@ class SignUpModal extends Component {
     return ( errors.emailMessage === '' && errors.passwordLevel !== 'error' )
   }
 
-  closeModal() {
-    if ( this.noErrors() ) {
-      this.props.onClose();
-    };
-  }
-
   setSubmitstate(e) {
     this.setState({
       hasSubmitted: true
     }, () => {
       if (this.noErrors()) {
-        this.props.onClose()
+        this.props.setSuccessMsg("Success!");
+        this.props.onClose();
       }
     })
   }
@@ -130,7 +126,7 @@ class SignUpModal extends Component {
     return (
       <Modal show={this.props.open} onHide={this.props.onClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Sign up Modal</Modal.Title>
+          <Modal.Title>Create Account</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {this.renderForm()}
