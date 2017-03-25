@@ -13,7 +13,7 @@ class SignUpModal extends Component {
   state = {
     email: '',
     password: '',
-    isSubmit: false,
+    hasSubmitted: false,
     passwordLevel: null,
     passwordMessage: '',
     emailLevel: null,
@@ -25,46 +25,48 @@ class SignUpModal extends Component {
       email: e.target.value,
     }, this.setErrorState);
 
-  };
+  }
 
   handlePwChange(e) {
     this.setState({
       password: e.target.value,
     }, this.setErrorState);
-  };
+  }
 
   setErrorState() {
-    const emailIsValid = emailRe.test(this.state.email);
-    const emailLevel = emailIsValid ? 'success' : 'error';
-    const emailMessage = emailIsValid ? '' : 'Email is invalid';
+    if (this.state.hasSubmitted) {
+      const emailIsValid = emailRe.test(this.state.email);
+      const emailLevel = emailIsValid ? 'success' : 'error';
+      const emailMessage = emailIsValid ? '' : 'Email is invalid';
 
-    let passwordLevel;
-    let passwordMessage = '';
-    const length = this.state.password.length;
-    if (length > 10) {
-      passwordLevel = 'success';
-    } else if (length > 6) {
-      passwordLevel = 'warning';
-      passwordMessage = 'Longer passwords are more secure';
-    } else if (length > 0) {
-      passwordLevel = 'error';
-      passwordMessage = 'Password is too short';
+      let passwordLevel;
+      let passwordMessage = '';
+      const length = this.state.password.length;
+      if (length > 10) {
+        passwordLevel = 'success';
+      } else if (length > 6) {
+        passwordLevel = 'warning';
+        passwordMessage = 'Longer passwords are more secure';
+      } else {
+        passwordLevel = 'error';
+        passwordMessage = 'Password is too short';
+      }
+
+      this.setState({
+        passwordLevel,
+        passwordMessage,
+        emailLevel,
+        emailMessage,
+      });
     }
-
-    this.setState({
-      passwordLevel,
-      passwordMessage,
-      emailLevel,
-      emailMessage,
-    });
-  };
+  }
 
 
 
   setSubmitstate(e) {
     this.setState({
-      isSubmit: true
-    })
+      hasSubmitted: true
+    }, this.setErrorState);
   }
 
  renderForm = () => (
@@ -102,8 +104,8 @@ class SignUpModal extends Component {
 
       <FormGroup>
         <Col smOffset={2} sm={10}>
-          <Button onClick={this.setSubmitstate.bind(this)}>
-            Sign In
+          <Button onClick={this.setSubmitstate.bind(this)} >
+            Sign Up
           </Button>
         </Col>
       </FormGroup>
@@ -120,7 +122,7 @@ class SignUpModal extends Component {
           {this.renderForm()}
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.onClose}>Close</Button>
+          <Button onClick={this.props.onClose} >Close</Button>
         </Modal.Footer>
       </Modal>
     );
