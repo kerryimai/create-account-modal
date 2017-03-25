@@ -14,27 +14,23 @@ class SignUpModal extends Component {
     email: '',
     password: '',
     hasSubmitted: false,
-    passwordLevel: null,
-    passwordMessage: '',
-    emailLevel: null,
-    emailMessage: '',
   };
 
   handleEmailChange(e) {
     this.setState({
       email: e.target.value,
-    }, this.setErrorState);
-
+    });
   }
 
   handlePwChange(e) {
     this.setState({
       password: e.target.value,
-    }, this.setErrorState);
+    });
   }
 
   setErrorState() {
     if (this.state.hasSubmitted) {
+      console.log("Set error")
       const emailIsValid = emailRe.test(this.state.email);
       const emailLevel = emailIsValid ? 'success' : 'error';
       const emailMessage = emailIsValid ? '' : 'Email is invalid';
@@ -42,9 +38,10 @@ class SignUpModal extends Component {
       let passwordLevel;
       let passwordMessage = '';
       const length = this.state.password.length;
-      if (length > 10) {
+      if (length > 12) {
         passwordLevel = 'success';
-      } else if (length > 6) {
+      } else if (length > 8) {
+
         passwordLevel = 'warning';
         passwordMessage = 'Longer passwords are more secure';
       } else {
@@ -52,26 +49,43 @@ class SignUpModal extends Component {
         passwordMessage = 'Password is too short';
       }
 
-      this.setState({
+      return ({
         passwordLevel,
         passwordMessage,
         emailLevel,
         emailMessage,
       });
     }
+    return {};
   }
 
 
+  noErrors() {
+    const errors = this.setErrorState();
+    return ( errors.emailMessage === '' && errors.passwordLevel !== 'error' )
+  }
+
+  closeModal() {
+    if ( this.noErrors() ) {
+      this.props.onClose();
+    };
+  }
 
   setSubmitstate(e) {
     this.setState({
       hasSubmitted: true
-    }, this.setErrorState);
+    }, () => {
+      if (this.noErrors()) {
+        this.props.onClose()
+      }
+    })
   }
 
- renderForm = () => (
+ renderForm = () => {
+   const validation = this.setErrorState();
+    return (
     <Form horizontal>
-      <FormGroup validationState={this.state.emailLevel}>
+      <FormGroup validationState={validation.emailLevel}>
         <Col componentClass={ControlLabel} sm={2}>
           Email
         </Col>
@@ -79,14 +93,14 @@ class SignUpModal extends Component {
           <FormControl
             type="email"
             placeholder="Email"
-            value={this.state.email}
+            value={validation.email}
             onChange={this.handleEmailChange.bind(this)}
           />
-        <HelpBlock>{this.state.emailMessage}</HelpBlock>
+        <HelpBlock>{validation.emailMessage}</HelpBlock>
         </Col>
       </FormGroup>
 
-      <FormGroup validationState={this.state.passwordLevel}>
+      <FormGroup validationState={validation.passwordLevel}>
         <Col componentClass={ControlLabel} sm={2}>
           Password
         </Col>
@@ -94,10 +108,10 @@ class SignUpModal extends Component {
           <FormControl
             type="password"
             placeholder="Password"
-            value={this.state.password}
+            value={validation.password}
             onChange={this.handlePwChange.bind(this)}
           />
-        <HelpBlock>{this.state.passwordMessage}</HelpBlock>
+        <HelpBlock>{validation.passwordMessage}</HelpBlock>
         </Col>
 
       </FormGroup>
@@ -110,7 +124,7 @@ class SignUpModal extends Component {
         </Col>
       </FormGroup>
     </Form>
-  );
+  )};
 
   render() {
     return (
