@@ -1,28 +1,39 @@
 import React, { Component } from 'react';
 import SignUpModal from '../SignUpModal';
 import { Button } from 'react-bootstrap';
-
+import { Redirect } from 'react-router';
 
 class Main extends Component {
+
   state = {
     SignUpModalOpen: false,
-    successMeesage: ''
   };
 
   toggleSignUp = () => {
     this.setState({ SignUpModalOpen: !this.state.SignUpModalOpen })
   };
 
-  handleSuccessLogin = (msg) => {
-    this.setState({ successMeesage: msg})
+  handleSignUpSuccess = () => {
+    this.setState({signUpSuccess: true})
   };
+
+  renderRedirect = () => {
+    if (this.state.signUpSuccess) {
+      return <Redirect push to="/dashboard" />
+    }
+  }
+
 
   render() {
     return (
       <div>
+        {this.renderRedirect()}
         <h1>Main</h1>
-        <h4>{this.state.successMeesage}</h4>
-        <SignUpModal open={this.state.SignUpModalOpen} onClose={this.toggleSignUp} setSuccessMsg={this.handleSuccessLogin}/>
+        <SignUpModal
+          open={this.state.SignUpModalOpen}
+          onClose={this.toggleSignUp}
+          onSignUpSuccess={this.handleSignUpSuccess}
+        />
         <Button onClick={this.toggleSignUp}> Sign up </Button>
       </div>
     );
@@ -30,3 +41,6 @@ class Main extends Component {
 }
 
 export default Main;
+
+
+// Main page start with background of wedding venue, sing up in the middle, opacity

@@ -1,14 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { Modal, Button, Form, FormGroup, FormControl, Col, ControlLabel, HelpBlock } from 'react-bootstrap';
 
-
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 class SignUpModal extends Component {
   static propTypes = {
     open: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
-    setSuccessMsg: PropTypes.func.isRequired,
+    onSignUpSuccess: PropTypes.func.isRequired,
   };
 
   state = {
@@ -17,21 +16,14 @@ class SignUpModal extends Component {
     hasSubmitted: false,
   };
 
-  handleEmailChange(e) {
+  handleChange(field, e) {
     this.setState({
-      email: e.target.value,
+      [field]: e.target.value,
     });
-  }
+  };
 
-  handlePwChange(e) {
-    this.setState({
-      password: e.target.value,
-    });
-  }
-
-  setErrorState() {
+  getErrors() {
     if (this.state.hasSubmitted) {
-      console.log("Set error")
       const emailIsValid = emailRe.test(this.state.email);
       const emailLevel = emailIsValid ? 'success' : 'error';
       const emailMessage = emailIsValid ? '' : 'Email is invalid';
@@ -62,7 +54,7 @@ class SignUpModal extends Component {
 
 
   noErrors() {
-    const errors = this.setErrorState();
+    const errors = this.getErrors();
     return ( errors.emailMessage === '' && errors.passwordLevel !== 'error' )
   }
 
@@ -71,14 +63,14 @@ class SignUpModal extends Component {
       hasSubmitted: true
     }, () => {
       if (this.noErrors()) {
-        this.props.setSuccessMsg("Success!");
         this.props.onClose();
+        this.props.onSignUpSuccess();
       }
     })
   }
 
  renderForm = () => {
-   const validation = this.setErrorState();
+   const validation = this.getErrors();
     return (
     <Form horizontal>
       <FormGroup validationState={validation.emailLevel}>
@@ -90,7 +82,7 @@ class SignUpModal extends Component {
             type="email"
             placeholder="Email"
             value={validation.email}
-            onChange={this.handleEmailChange.bind(this)}
+            onChange={this.handleChange.bind(this, 'email')}
           />
         <HelpBlock>{validation.emailMessage}</HelpBlock>
         </Col>
@@ -105,7 +97,7 @@ class SignUpModal extends Component {
             type="password"
             placeholder="Password"
             value={validation.password}
-            onChange={this.handlePwChange.bind(this)}
+            onChange={this.handleChange.bind(this, 'password')}
           />
         <HelpBlock>{validation.passwordMessage}</HelpBlock>
         </Col>
@@ -126,7 +118,10 @@ class SignUpModal extends Component {
     return (
       <Modal show={this.props.open} onHide={this.props.onClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Create Account</Modal.Title>
+          <Modal.Title>CREATE ACCOUNT<br/>
+            Hi there! <br/>
+          You’re only one step away from crafting your own unique wedding experience.
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {this.renderForm()}
