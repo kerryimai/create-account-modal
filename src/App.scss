@@ -1,3 +1,24 @@
 // https://github.com/webpack-contrib/sass-loader/issues/40
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+$border-radius-large: 0;
+$btn-default-bg: fade-out(#fffafa, 0.3);
+$btn-default-border: transparent;
 @import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@font-face {
+  font-family: 'cursive';
+  src: url('./fonts/Variane Script.ttf');
+}
+
+.cursive {
+  font-family: cursive;
+}
+
+.btn-default {
+  &:hover, &:active, &:hover:active, &:focus {
+    background-color: fade-out(#fffafa, 0.1);
+  }
+}
+
+.btn:focus, .btn:focus:active {
+  outline: none;
+}

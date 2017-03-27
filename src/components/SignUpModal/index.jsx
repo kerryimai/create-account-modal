@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Modal, Button, Form, FormGroup, FormControl, Col, ControlLabel, HelpBlock } from 'react-bootstrap';
+import './SignUpModal.scss';
 
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -116,7 +117,7 @@ class SignUpModal extends Component {
 
   render() {
     return (
-      <Modal show={this.props.open} onHide={this.props.onClose}>
+      <Modal show={this.props.open} onHide={this.props.onClose} style={{paddingLeft: 0}}>
         <Modal.Header closeButton>
           <Modal.Title>CREATE ACCOUNT<br/>
             Hi there! <br/>
@@ -127,7 +128,6 @@ class SignUpModal extends Component {
           {this.renderForm()}
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.onClose} >Close</Button>
         </Modal.Footer>
       </Modal>
     );
