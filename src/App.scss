@@ -3,14 +3,18 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 $border-radius-large: 0;
 $btn-default-bg: fade-out(#fffafa, 0.3);
 $btn-default-border: transparent;
+$btn-primary-bg: fade-out(#E24E61, 0.10);
+$btn-primary-border: transparent;
 @import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
-@font-face {
-  font-family: 'cursive';
-  src: url('./fonts/Variane Script.ttf');
-}
+
+
 
 .cursive {
   font-family: cursive;
+}
+
+.sans-serif {
+  font-family: Candara, sans-serif;
 }
 
 .btn-default {

@@ -73,7 +73,7 @@ class SignUpModal extends Component {
  renderForm = () => {
    const validation = this.getErrors();
     return (
-    <Form horizontal>
+    <Form horizontal className="sans-serif">
       <FormGroup validationState={validation.emailLevel}>
         <Col componentClass={ControlLabel} sm={2}>
           Email
@@ -81,7 +81,7 @@ class SignUpModal extends Component {
         <Col sm={10}>
           <FormControl
             type="email"
-            placeholder="Email"
+            placeholder="name@xo.com"
             value={validation.email}
             onChange={this.handleChange.bind(this, 'email')}
           />
@@ -105,26 +105,34 @@ class SignUpModal extends Component {
 
       </FormGroup>
 
-      <FormGroup>
-        <Col smOffset={2} sm={10}>
-          <Button onClick={this.setSubmitstate.bind(this)} >
-            Sign Up
-          </Button>
-        </Col>
+      <FormGroup className="submit-buttons">
+        <Col xs={12}>
+
+        <Button
+          onClick={this.setSubmitstate.bind(this)}
+          block
+          bsStyle="primary"
+        >
+          Sign Up
+        </Button>
+      </Col>
       </FormGroup>
     </Form>
   )};
 
   render() {
     return (
-      <Modal show={this.props.open} onHide={this.props.onClose} style={{paddingLeft: 0}}>
+      <Modal className="sign-up-modal" show={this.props.open} onHide={this.props.onClose} style={{paddingLeft: 0}}>
         <Modal.Header closeButton>
-          <Modal.Title>CREATE ACCOUNT<br/>
-            Hi there! <br/>
-          You’re only one step away from crafting your own unique wedding experience.
+          <Modal.Title className="cursive">
+            Create Account
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <div className="cursive">
+            <p>Hi there!</p>
+            <p>You’re only one step away from crafting your own unique wedding experience.</p>
+          </div>
           {this.renderForm()}
         </Modal.Body>
         <Modal.Footer>

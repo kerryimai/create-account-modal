@@ -1,3 +1,7 @@
+$modal-height: 112px;
+$modal-padding: 15px;
+$modal-border-width: 1px;
+
 .modal-dialog {
   width: 100%;
   height: 100%;
@@ -15,4 +19,49 @@
   .modal-content {
     height: 100%;
   }
+}
+
+.sign-up-modal {
+  .modal-header {
+    background-image: url('./wedding5.jpg');
+    background-position: center center;
+    background-size: 100%;
+    min-height: $modal-height;
+    padding: $modal-padding;
+    .modal-title {
+      text-align: center;
+      line-height: $modal-height - 2 * $modal-padding - $modal-border-width;
+      font-size: 48px;
+      font-weight: bolder;
+      color: black;
+    }
+  }
+
+  .modal-body {
+    padding: 5% 10% 10%;
+    text-align: center;
+    color: #7b7b7b;
+    p {
+      font-size: 18px;
+    }
+
+    form {
+      margin-top: 50px;
+
+      .submit-buttons {
+        margin-top: 40px;
+      }
+    }
+  }
+
+  .modal-footer {
+    background-image: url('./roses-0.jpg');
+    background-position: center center;
+    background-size: 110%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: $modal-height;
+  }
+
 }
