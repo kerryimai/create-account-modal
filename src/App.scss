@@ -27,3 +27,7 @@ $btn-primary-border: transparent;
 .btn:focus, .btn:focus:active {
   outline: none;
 }
+
+.btn {
+  border-radius: 0;
+}
