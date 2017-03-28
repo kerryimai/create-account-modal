@@ -51,7 +51,7 @@ class Main extends Component {
           onClose={this.toggleSignUp}
           onSignUpSuccess={this.handleSignUpSuccess}
         />
-      <Button className="cursive" style={this.styles.button} onClick={this.toggleSignUp}> Sign up </Button>
+        <Button className="cursive" style={this.styles.button} onClick={this.toggleSignUp}> Sign up </Button>
       </div>
     );
   }

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import tableSrc from './white-table.jpg';
 
-
-
-
 class Dashboard extends Component {
   styles = {
     outer: {
@@ -43,10 +40,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="dashboard-container" style={this.styles.outer}>
-        <div style={this.styles.header}>
-          test
-        </div>
-
+        <div style={this.styles.header} />
         <div style={this.styles.intro}>
           <h1 >Personal Dashboard</h1>
           <p className="successMsg">

@@ -35,7 +35,6 @@ class SignUpModal extends Component {
       if (length > 12) {
         passwordLevel = 'success';
       } else if (length > 8) {
-
         passwordLevel = 'warning';
         passwordMessage = 'Longer passwords are more secure';
       } else {
@@ -59,7 +58,7 @@ class SignUpModal extends Component {
     return ( errors.emailMessage === '' && errors.passwordLevel !== 'error' )
   }
 
-  setSubmitstate(e) {
+  setSubmitState(e) {
     this.setState({
       hasSubmitted: true
     }, () => {
@@ -88,7 +87,7 @@ class SignUpModal extends Component {
             value={validation.email}
             onChange={this.handleChange.bind(this, 'email')}
           />
-        <HelpBlock>{validation.emailMessage}</HelpBlock>
+          <HelpBlock>{validation.emailMessage}</HelpBlock>
         </Col>
       </FormGroup>
 
@@ -103,22 +102,21 @@ class SignUpModal extends Component {
             value={validation.password}
             onChange={this.handleChange.bind(this, 'password')}
           />
-        <HelpBlock>{validation.passwordMessage}</HelpBlock>
+          <HelpBlock>{validation.passwordMessage}</HelpBlock>
         </Col>
 
       </FormGroup>
 
       <FormGroup className="submit-buttons">
         <Col xs={12}>
-
-        <Button
-          onClick={this.setSubmitstate.bind(this)}
-          block
-          bsStyle="primary"
-        >
-          Sign Up
-        </Button>
-      </Col>
+          <Button
+            onClick={this.setSubmitState.bind(this)}
+            block
+            bsStyle="primary"
+          >
+            Sign Up
+          </Button>
+        </Col>
       </FormGroup>
     </Form>
   )};
