@@ -65,7 +65,10 @@ class SignUpModal extends Component {
     }, () => {
       if (this.noErrors()) {
         this.props.onClose();
-        this.props.onSignUpSuccess();
+        this.props.onSignUpSuccess({
+          email: this.state.email,
+          password: this.state.password
+        });
       }
     })
   }
@@ -135,8 +138,7 @@ class SignUpModal extends Component {
           </div>
           {this.renderForm()}
         </Modal.Body>
-        <Modal.Footer>
-        </Modal.Footer>
+        <Modal.Footer />
       </Modal>
     );
   }
