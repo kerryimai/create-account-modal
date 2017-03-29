@@ -15,6 +15,7 @@ class Dashboard extends Component {
       flexGrow: '1',
       backgroundSize: 'cover',
       backgroundImage: `url(${tableSrc})`,
+      backgroundPosition: 'center center',
       minHeight: '45%',
       width: '100%',
     },

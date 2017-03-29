@@ -1,46 +1,34 @@
-$modal-height: 112px;
+$modal-header-height: 112px;
 $modal-padding: 15px;
+$modal-total-height: 600px;
+$modal-body-height: $modal-total-height - $modal-header-height;
 $modal-border-width: 1px;
 
-.modal-dialog {
-  width: 100%;
-  min-height: 100%;
-  margin: 0;
-  flex-direction: column;
-  display: flex;
-
-}
-
-.modal-content {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  height: 100%;
-}
-
-@media (min-width: 769px) {
-  .modal-dialog {
-    width: 768px;
-    height: 600px;
-    margin: 30px auto;
-  }
-  .modal-content {
-    height: 100%;
-  }
-}
 
 
 .sign-up-modal {
+  .modal-dialog {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    flex-direction: column;
+    display: flex;
+  }
+
+  .modal-content {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
   .modal-header {
     background-image: url('./wedding5.jpg');
     background-position: center center;
-    background-size: 100%;
-    min-height: $modal-height;
+    background-size: cover;
+    min-height: $modal-header-height;
     padding: $modal-padding;
     .modal-title {
       text-align: center;
-      line-height: $modal-height - 2 * $modal-padding - $modal-border-width;
-      font-size: 48px;
+      font-size: 40px;
       font-weight: bolder;
       color: black;
     }
@@ -50,37 +38,50 @@ $modal-border-width: 1px;
     padding: 5% 10% 10%;
     text-align: center;
     color: #7b7b7b;
+    height: 70%;
     p {
       font-size: 18px;
     }
 
     form {
       margin-top: 50px;
-
       .submit-buttons {
         margin-top: 40px;
       }
     }
   }
 
-
   .modal-footer {
     background-image: url('./roses-0.jpg');
-    background-position: center center;
-    background-size: 110%;
-    vertical-align:bottom;
+    background-size: cover;
     flex-grow: 1;
   }
 
   @media (min-width: 769px) {
     .modal-footer {
       background-image: url('./roses-0.jpg');
-      background-position: center center;
-      background-size: 110%;
       position: absolute;
       bottom: 0;
       width: 100%;
-      height: $modal-height;
+      height: $modal-header-height;
+    }
+    .modal-header {
+      .modal-title {
+        line-height: $modal-header-height - 2 * $modal-padding - $modal-border-width;
+        font-size: 48px;
+      }
+    }
+    .modal-dialog {
+      width: 768px;
+      height: 600px;
+      margin: 30px auto;
+    }
+    .modal-body{
+      height: $modal-body-height;
+    }
+    .modal-content {
+      min-height: auto;
+      height: $modal-total-height;
     }
   }
 }
